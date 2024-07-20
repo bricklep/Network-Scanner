@@ -18,10 +18,12 @@ h1{
     text-align: center;
 }
 select{
-    width: 200px;
+    width: auto;
     padding: 10px;
     margin: 10px;
+    font-size: large;
 }
+
 #loading{
     padding: 10px;
 }
@@ -42,8 +44,8 @@ button:hover{
 
 ul{
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: 10px;
+    padding: 10px;
     width: 50%;
     overflow: hidden;
 }

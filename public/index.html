@@ -5,12 +5,15 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <h1>Discovered Devices</h1>
+  <h1>Device Scanner</h1>
   
   <div id="header">
   
     <button id="scanBtn">Scan Network</button>
-    <select id="interfaceSelect"></select>
+    <select id="interfaceSelect">
+      <option value="eth0">eth0 (none)</option>
+      <option value="wlan0">wlan0 (none)</option>
+    </select>
     <div id="loading"></div>
   </div>
   
