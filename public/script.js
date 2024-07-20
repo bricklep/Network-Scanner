@@ -12,11 +12,21 @@ async function fetchInterfaces() {
   });
 }
 
+document.getElementById('interfaceSelect').addEventListener('change', () => {
+  const selectedInterface = document.getElementById('interfaceSelect').value;
+  console.log('Selected Interface:', selectedInterface);
+});
+
 document.getElementById('scanBtn').addEventListener('click', () => {
   const loading = document.getElementById('loading');
   loading.innerHTML = 'Scanning...'; // Show a loading message
-  const network = document.getElementById('interfaceSelect').value;
-  fetch(`/scan?network=${network}`)
+  let network = document.getElementById('interfaceSelect').value;
+
+  // Assuming the IP address is in the format xxx.xxx.xxx.xxx
+  // Remove the last octet and replace it with '0' for the base network address
+  network = network.substring(0, network.lastIndexOf('.')) + '.';
+  
+  fetch(`/scan?network=${encodeURIComponent(network)}`)
     .then(response => response.json())
     .then(data => {
       // Sort the IP addresses
@@ -33,7 +43,7 @@ document.getElementById('scanBtn').addEventListener('click', () => {
       const deviceList = document.getElementById('deviceList');
       deviceList.innerHTML = '';
       loading.innerHTML = ''; // Clear the loading message
-      data.forEach(device => {
+      sortedData.forEach(device => {
         const listItem = document.createElement('li');
         console.log(device);
         listItem.textContent = device;
