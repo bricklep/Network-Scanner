@@ -2,11 +2,18 @@
 <html>
 <head>
   <title>Device Scanner</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <h1>Discovered Devices</h1>
-  <select id="interfaceSelect"></select>
-  <button id="scanBtn">Scan Network</button>
+  
+  <div id="header">
+  
+    <button id="scanBtn">Scan Network</button>
+    <select id="interfaceSelect"></select>
+    <div id="loading"></div>
+  </div>
+  
   <ul id="deviceList"></ul>
 
   <script src="script.js">

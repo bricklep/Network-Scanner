@@ -13,6 +13,8 @@ async function fetchInterfaces() {
 }
 
 document.getElementById('scanBtn').addEventListener('click', () => {
+  const loading = document.getElementById('loading');
+  loading.innerHTML = 'Scanning...'; // Show a loading message
   const network = document.getElementById('interfaceSelect').value;
   fetch(`/scan?network=${network}`)
     .then(response => response.json())
@@ -30,6 +32,7 @@ document.getElementById('scanBtn').addEventListener('click', () => {
 
       const deviceList = document.getElementById('deviceList');
       deviceList.innerHTML = '';
+      loading.innerHTML = ''; // Clear the loading message
       data.forEach(device => {
         const listItem = document.createElement('li');
         console.log(device);
