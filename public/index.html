@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Device Scanner</title>
+</head>
+<body>
+  <h1>Discovered Devices</h1>
+  <select id="interfaceSelect"></select>
+  <button id="scanBtn">Scan Network</button>
+  <ul id="deviceList"></ul>
+  
+  <script>
+    async function fetchInterfaces() {
+      const response = await fetch('/interfaces');
+      const interfaces = await response.json();
+      const select = document.getElementById('interfaceSelect');
+      interfaces.forEach(iface => {
+        const option = document.createElement('option');
+        option.value = iface.address;
+        option.textContent = `${iface.name} (${iface.address})`;
+        select.appendChild(option);
+      });
+    }
+
+    document.getElementById('scanBtn').addEventListener('click', () => {
+      const network = document.getElementById('interfaceSelect').value;
+      fetch(`/scan?network=${network}`)
+        .then(response => response.json())
+        .then(data => {
+          const deviceList = document.getElementById('deviceList');
+          deviceList.innerHTML = '';
+          data.forEach(device => {
+            const listItem = document.createElement('li');
+            listItem.textContent = device;
+            deviceList.appendChild(listItem);
+          });
+        });
+    });
+
+    fetchInterfaces();
+  </script>
+</body>
+</html>
