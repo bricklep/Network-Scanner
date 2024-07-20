@@ -34,7 +34,7 @@ app.get('/scan', (req, res) => {
       session.pingHost(ip, (error, target) => {
         if (!error) {
           devices.push(target);
-          console.log(`${target} is alive`);
+          console.log(target);
         }
         resolve();
       });
